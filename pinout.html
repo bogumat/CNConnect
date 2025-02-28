@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pi 3 Model B Pin Diagram (Revamped)</title>
+  <!-- Tailwind CSS for utility classes -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Minimal toggle styling, if you want a GPIO Test toggle */
+    .toggle-container {
+      width: 56px;
+      height: 32px;
+      position: relative;
+    }
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 16px;
+    }
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 28px;
+      width: 28px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+    input:checked + .toggle-slider {
+      background-color: #34d399;
+    }
+    input:checked + .toggle-slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Circles hover effect: bigger + shadow */
+    .pin-circle:hover {
+      transform: scale(1.25);
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    }
+    .pin-circle {
+      transition: transform 0.2s ease;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-4 text-xs">
+
+  <!-- GPIO Test Toggle -->
+  <div class="mb-4 flex items-center">
+    <label class="toggle-container relative">
+      <input id="toggle-gpio-test" type="checkbox" class="opacity-0 w-0 h-0 absolute">
+      <span class="toggle-slider"></span>
+    </label>
+    <span id="gpioTestLabel" class="ml-2 text-gray-600 font-semibold">GPIO Test OFF</span>
+  </div>
+
+  <table class="table-auto w-full text-left border-collapse">
+    <thead>
+      <tr class="text-left">
+        <th class="py-1 px-2">Pin #</th>
+        <th class="py-1 px-2">Label</th>
+        <th class="py-1 px-2 text-center">O&nbsp;O</th>
+        <th class="py-1 px-2">Label</th>
+        <th class="py-1 px-2">Pin #</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Row 1: Pins 1 & 2 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">1</td>
+        <td class="py-1 px-2">3.3V</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 1: 3.3V => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 1 (3.3V)"
+          ></span>
+          <!-- Pin 2: 5V => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 2 (5V)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">5V</td>
+        <td class="py-1 px-2">2</td>
+      </tr>
+
+      <!-- Row 2: Pins 3 & 4 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">3</td>
+        <td class="py-1 px-2">GPIO 2 (SDA1)</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 3 => BCM 2 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="2"
+            title="Pin 3 (GPIO 2)"
+          ></span>
+          <!-- Pin 4 => 5V => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 4 (5V)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">5V</td>
+        <td class="py-1 px-2">4</td>
+      </tr>
+
+      <!-- Row 3: Pins 5 & 6 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">5</td>
+        <td class="py-1 px-2">GPIO 3 (SCL1)</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 5 => BCM 3 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="3"
+            title="Pin 5 (GPIO 3)"
+          ></span>
+          <!-- Pin 6 => GND => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 6 (GND)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GND</td>
+        <td class="py-1 px-2">6</td>
+      </tr>
+
+      <!-- Row 4: Pins 7 & 8 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">7</td>
+        <td class="py-1 px-2">GPIO 4</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 7 => BCM 4 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="4"
+            title="Pin 7 (GPIO 4)"
+          ></span>
+          <!-- Pin 8 => BCM 14 (UART TXD) -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="14"
+            title="Pin 8 (GPIO 14)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 14 (TXD0)</td>
+        <td class="py-1 px-2">8</td>
+      </tr>
+
+      <!-- Row 5: Pins 9 & 10 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">9</td>
+        <td class="py-1 px-2">GND</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 9 => GND => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 9 (GND)"
+          ></span>
+          <!-- Pin 10 => BCM 15 (UART RXD) -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="15"
+            title="Pin 10 (GPIO 15)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 15 (RXD0)</td>
+        <td class="py-1 px-2">10</td>
+      </tr>
+
+      <!-- Row 6: Pins 11 & 12 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">11</td>
+        <td class="py-1 px-2">GPIO 17</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 11 => BCM 17 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="17"
+            title="Pin 11 (GPIO 17)"
+          ></span>
+          <!-- Pin 12 => BCM 18 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="18"
+            title="Pin 12 (GPIO 18)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 18</td>
+        <td class="py-1 px-2">12</td>
+      </tr>
+
+      <!-- Row 7: Pins 13 & 14 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">13</td>
+        <td class="py-1 px-2">GPIO 27</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 13 => BCM 27 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="27"
+            title="Pin 13 (GPIO 27)"
+          ></span>
+          <!-- Pin 14 => GND => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 14 (GND)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GND</td>
+        <td class="py-1 px-2">14</td>
+      </tr>
+
+      <!-- Row 8: Pins 15 & 16 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">15</td>
+        <td class="py-1 px-2">GPIO 22</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 15 => BCM 22 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="22"
+            title="Pin 15 (GPIO 22)"
+          ></span>
+          <!-- Pin 16 => BCM 23 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="23"
+            title="Pin 16 (GPIO 23)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 23</td>
+        <td class="py-1 px-2">16</td>
+      </tr>
+
+      <!-- Row 9: Pins 17 & 18 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">17</td>
+        <td class="py-1 px-2">3.3V</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 17 => 3.3V => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 17 (3.3V)"
+          ></span>
+          <!-- Pin 18 => BCM 24 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="24"
+            title="Pin 18 (GPIO 24)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 24</td>
+        <td class="py-1 px-2">18</td>
+      </tr>
+
+      <!-- Row 10: Pins 19 & 20 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">19</td>
+        <td class="py-1 px-2">GPIO 10 (MOSI)</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 19 => BCM 10 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="10"
+            title="Pin 19 (GPIO 10)"
+          ></span>
+          <!-- Pin 20 => GND => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 20 (GND)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GND</td>
+        <td class="py-1 px-2">20</td>
+      </tr>
+
+      <!-- Row 11: Pins 21 & 22 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">21</td>
+        <td class="py-1 px-2">GPIO 9 (MISO)</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 21 => BCM 9 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="9"
+            title="Pin 21 (GPIO 9)"
+          ></span>
+          <!-- Pin 22 => BCM 25 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="25"
+            title="Pin 22 (GPIO 25)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 25</td>
+        <td class="py-1 px-2">22</td>
+      </tr>
+
+      <!-- Row 12: Pins 23 & 24 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">23</td>
+        <td class="py-1 px-2">GPIO 11 (SCLK)</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 23 => BCM 11 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="11"
+            title="Pin 23 (GPIO 11)"
+          ></span>
+          <!-- Pin 24 => BCM 8 (CE0) -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="8"
+            title="Pin 24 (GPIO 8)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 8 (CE0)</td>
+        <td class="py-1 px-2">24</td>
+      </tr>
+
+      <!-- Row 13: Pins 25 & 26 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">25</td>
+        <td class="py-1 px-2">GND</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 25 => GND => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 25 (GND)"
+          ></span>
+          <!-- Pin 26 => BCM 7 (CE1) -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="7"
+            title="Pin 26 (GPIO 7)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 7 (CE1)</td>
+        <td class="py-1 px-2">26</td>
+      </tr>
+
+      <!-- Row 14: Pins 27 & 28 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">27</td>
+        <td class="py-1 px-2">ID_SD</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 27 => ID_SD => not typically used as standard GPIO -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="27"
+            title="Pin 27 (ID_SD)"
+          ></span>
+          <!-- Pin 28 => ID_SC => also not typically standard GPIO -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="28"
+            title="Pin 28 (ID_SC)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">ID_SC</td>
+        <td class="py-1 px-2">28</td>
+      </tr>
+
+      <!-- Row 15: Pins 29 & 30 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">29</td>
+        <td class="py-1 px-2">GPIO 5</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 29 => BCM 5 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="5"
+            title="Pin 29 (GPIO 5)"
+          ></span>
+          <!-- Pin 30 => GND => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 30 (GND)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GND</td>
+        <td class="py-1 px-2">30</td>
+      </tr>
+
+      <!-- Row 16: Pins 31 & 32 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">31</td>
+        <td class="py-1 px-2">GPIO 6</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 31 => BCM 6 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="6"
+            title="Pin 31 (GPIO 6)"
+          ></span>
+          <!-- Pin 32 => BCM 12 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="12"
+            title="Pin 32 (GPIO 12)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 12</td>
+        <td class="py-1 px-2">32</td>
+      </tr>
+
+      <!-- Row 17: Pins 33 & 34 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">33</td>
+        <td class="py-1 px-2">GPIO 13</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 33 => BCM 13 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="13"
+            title="Pin 33 (GPIO 13)"
+          ></span>
+          <!-- Pin 34 => GND => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 34 (GND)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GND</td>
+        <td class="py-1 px-2">34</td>
+      </tr>
+
+      <!-- Row 18: Pins 35 & 36 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">35</td>
+        <td class="py-1 px-2">GPIO 19</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 35 => BCM 19 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="19"
+            title="Pin 35 (GPIO 19)"
+          ></span>
+          <!-- Pin 36 => BCM 16 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="16"
+            title="Pin 36 (GPIO 16)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 16</td>
+        <td class="py-1 px-2">36</td>
+      </tr>
+
+      <!-- Row 19: Pins 37 & 38 -->
+      <tr class="border-b">
+        <td class="py-1 px-2">37</td>
+        <td class="py-1 px-2">GPIO 26</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 37 => BCM 26 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="26"
+            title="Pin 37 (GPIO 26)"
+          ></span>
+          <!-- Pin 38 => BCM 20 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="20"
+            title="Pin 38 (GPIO 20)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 20</td>
+        <td class="py-1 px-2">38</td>
+      </tr>
+
+      <!-- Row 20: Pins 39 & 40 -->
+      <tr>
+        <td class="py-1 px-2">39</td>
+        <td class="py-1 px-2">GND</td>
+        <td class="py-1 px-2 text-center">
+          <!-- Pin 39 => GND => static -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-static-pin="true"
+            title="Pin 39 (GND)"
+          ></span>
+          <!-- Pin 40 => BCM 21 -->
+          <span
+            class="inline-block w-3 h-3 rounded-full bg-gray-300 mx-1 pin-circle"
+            data-pin="21"
+            title="Pin 40 (GPIO 21)"
+          ></span>
+        </td>
+        <td class="py-1 px-2">GPIO 21</td>
+        <td class="py-1 px-2">40</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

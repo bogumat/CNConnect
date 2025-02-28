@@ -1,0 +1,7 @@
+{
+  "sshConnect": "ssh -tt pi@cnc.local",
+  "mkdirDir": "ssh -tt pi@cnc.local \"mkdir -p {dir}\"",
+  "scpUpload": "scp {file} pi@cnc.local:\"{uploadDir}\"",
+  "setPinOutputHigh": "ssh -tt pi@cnc.local \"sudo pinctrl set {pin} op pn dh\"",
+  "setPinOutputLow":  "ssh -tt pi@cnc.local \"sudo pinctrl set {pin} op pn dl\""
+}
